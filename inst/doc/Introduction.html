@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Introduction</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introduction</h1>
+
+
+
+<div id="summary" class="section level2">
+<h2>Summary</h2>
+<p><code>scAnnotate</code> is a supervised machine learning model for
+cell-type annotation.</p>
+<p>For more details, see our paper: [scAnnotate: an automated cell type
+annotation tool for single-cell RNA-sequencing data].</p>
+</div>
+<div id="application-of-scannotate" class="section level2">
+<h2>Application of scAnnotate</h2>
+<p>For this tutorial, we’ll work with two subsets of the human
+Peripheral Blood Mononuclear Cells (PBMC) scRNA-seq dataset from the
+<code>SeuratData</code> package that were sequenced using two different
+platforms.</p>
+<p>First, we’ll load the <code>scAnnotate</code> package.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scAnnotate)</span></code></pre></div>
+</div>
+<div id="setting-up-the-data" class="section level2">
+<h2>Setting up the data</h2>
+<p>If the input gene expression data is in raw counts, please normalize
+it by the “sequencing depth” of each cell and apply a natural
+logarithmic transformation. This can be done using the NormalizeData
+function from the <code>Seurat</code> package, via the “LogNormalize”
+method and a scale factor of 10,000.</p>
+<p>We assume that you have <em>log-transformed</em> (i.e. size-factor
+normalized) matrices for both the training and testing data, where each
+row is a cell and each column is a gene.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(pbmc1)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(pbmc2)</span></code></pre></div>
+<p>The example datasets are already log-transformed and normalized. You
+can find more details about the example datasets by typing the following
+commands into the R console:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>?pbmc1</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>?pbmc2</span></code></pre></div>
+</div>
+<div id="training-and-annotation" class="section level2">
+<h2>Training and annotation</h2>
+<p><code>scAnnotate</code> has two separate workflows with different
+batch effect removal steps based on the size of the training data. We
+suggest using Seurat for big data (i.e. all cell types have greater than
+100 observations with at most one exception type, that has less than 100
+and greater than 20 observations) and using Harmony for small data
+(i.e. all cell types have less than 100 observations).</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>predict_label<span class="ot">=</span><span class="fu">scAnnotate</span>(<span class="at">train=</span>pbmc1,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                         <span class="at">test=</span>pbmc2[,<span class="sc">-</span><span class="dv">1</span>],</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                         <span class="at">distribution=</span><span class="st">&quot;normal&quot;</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                         <span class="at">correction =</span><span class="st">&quot;auto&quot;</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                         <span class="at">screening =</span> <span class="st">&quot;wilcox&quot;</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                         <span class="at">threshold=</span><span class="dv">0</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Scaling features for provided objects</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Finding all pairwise anchors</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Running CCA</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Merging objects</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Finding neighborhoods</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Finding anchors</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Found 2243 anchors</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Filtering anchors</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  Retained 1463 anchors</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Merging dataset 1 into 2</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Extracting anchors for merged samples</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Finding integration vectors</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Finding integration vector weights</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Integrating data</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Non-unique features (rownames) present in the input matrix, making</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unique</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Centering and scaling data matrix</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 1 </span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  FTL.1, LST1.1, FTH1.1, PSAP.1, CTSS.1, COTL1.1, CST3.1, AIF1.1, TYROBP.1, SERPINA1.1 </span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IFITM3.1, FCGR3A.1, SAT1.1, FCER1G.1, CDKN1C.1, MAFB.1, LYN.1, MS4A7.1, TNFRSF1B.1, PECAM1.1 </span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CD68.1, NEAT1.1, S100A6.1, CEBPB.1, S100A4.1, HCK.1, SPI1.1, POU2F2.1, FCN1.1, LINC01272.1 </span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  LST1.2, PSAP, CTSS.2, PSAP.2, CTSS, LST1, CST3, COTL1.2, CST3.2, AIF1.2 </span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FTH1.2, AIF1, COTL1, FCGR3A, SERPINA1.2, SERPINA1, IFITM3, TYROBP.2, TYROBP, FTH1 </span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FTL.2, SAT1.2, FCER1G.2, FCER1G, SAT1, CDKN1C.2, LYN.2, IFITM3.2, FCGR3A.2, CDKN1C </span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 2 </span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  CD74.2, CD79A.1, HLA.DRA.2, CD79A.2, MS4A1.2, MS4A1.1, IGHM.2, IGHM.1, CCL5.2, NKG7.2 </span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     HLA.DRA.1, IGKC.2, BANK1.2, HLA.DRB1.2, IGKC.1, HLA.DPA1.2, CST7.2, IGHD.1, IGHD.2, HLA.DPB1.2 </span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     LTB.1, BANK1.1, LTB.2, PFN1.1, GZMH.2, PFN1.2, IGHG1.2, IGHG1.1, RPLP1.2, RPS21.2 </span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CD74, HLA.DRA, CD79A, MS4A1, IGHM, CCL5, CCL5.1, NKG7, NKG7.1, HLA.DRB1 </span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     BANK1, IGKC, HLA.DPA1, HLA.DPB1, CST7, CST7.1, IGHD, LTB, CD37, RPLP1 </span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     PFN1, GZMH.1, RPS21, IGHG1, IGLC2, RPS6, IL32.1, GZMA.1, GNLY.1, CALM1 </span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 3 </span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPS26.2, RPS3.2, SRGN.2, S100A4.2, CD52.2, IL32.2, TRBC2.2, ETS1.2, CXCR4.2, ID2.2 </span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS15A.2, RPS10.2, RPS21.2, RPS5.2, GZMH.2, RPS6.2, SYNE2.2, ZBTB7A.2, JUNB.2, RPLP1.2 </span></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     S100A6.2, PTP4A2.2, HLA.DPB1, TNFAIP3.2, HCK.1, HLA.DRA, FOS.1, GZMA.2, TRBC1.2, FTL.2 </span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CALM1.1, RPS15A.1, CD52.1, IL32, RPS21.1, RPS26.1, RPS5.1, HLA.DPB1.1, RPLP1.1, RPS6.1 </span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS10.1, CD37.1, RPS3.1, SYNE2.1, GZMH, TRBC1.1, HLA.DPA1.1, SYNE2, S100A6, TRBC2.1 </span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TNFAIP3.1, GZMH.1, PRF1, HLA.DRB1.1, IL32.1, LTB.2, PFN1.1, GZMB.1, HCK, HCK.2 </span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 4 </span></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPS15A, RPS26, RPLP1, RPS3, RPS6, IL7R.2, RPS21, IGHD.2, IGHD.1, IGHM.2 </span></span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGHM.1, RPS10, GZMH, MALAT1, IL4R.2, NEAT1.2, DUSP1, DUSP1.2, IL4R.1, FOS.2 </span></span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FCRL5.2, FCRL5.1, FOS, NEAT1, GZMB.1, GZMH.1, CD247.2, TNFRSF13C.1, ZBTB7A.2, TNFRSF13C.2 </span></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPS6.2, RPS15A.2, RPLP1.2, IL7R.1, RPS21.2, IL7R, IGHD, RPS3.2, IGHM, GZMH.2 </span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS26.1, IL4R, DUSP1.1, NEAT1.1, FOS.1, MALAT1.2, FCRL5, RPS6.1, MALAT1.1, S100A6.2 </span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS3.1, CD247.1, RPLP1.1, RPS5.2, GZMB.2, TNFRSF13C, ZBTB7A.1, TCL1A, CXCR4.2, RPS10.2 </span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 5 </span></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  IGHG1.1, IGHG1.2, TCL1A, RP5.887A10.1.1, RP5.887A10.1.2, IGHD, IL4R, NEAT1.2, IGHM, IGLC2.2 </span></span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NEAT1, IGLC2.1, FOS.2, BANK1.2, FOS, MS4A1.1, MS4A1.2, FCRL5, CALM1.1, BANK1.1 </span></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     PTP4A2.2, LINC01272.1, CD68.1, DUSP1.2, ZBTB7A.2, TRBC2, IGLC3.1, IGLC3.2, ZBTB7A, DUSP1 </span></span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  IGHG1, TCL1A.1, TCL1A.2, RP5.887A10.1, IGHD.1, IGHD.2, IL4R.2, IL4R.1, NEAT1.1, IGHM.1 </span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGHM.2, IGLC2, BANK1, FOS.1, MS4A1, FCRL5.1, FCRL5.2, ZBTB7A.1, LINC01272, LINC01272.2 </span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CD68.2, CD68, PTP4A2.1, DUSP1.1, IGLC3, S100A6.2, CALM1, MALAT1.1, TRBC2.2, FCER1G</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Non-unique features (rownames) present in the input matrix, making</span></span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unique</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Centering and scaling data matrix</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 1 </span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  LST1, LST1.2, PSAP, PSAP.2, CTSS.2, CST3, CST3.2, COTL1.2, CTSS, AIF1.2 </span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FTL.2, TYROBP, FTH1.2, IFITM3.2, FCGR3A, SERPINA1, SERPINA1.2, IFITM3, TYROBP.2, COTL1 </span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     AIF1, SAT1.2, FCER1G, SAT1, LYN.2, FCGR3A.2, CDKN1C.2, CDKN1C, MS4A7.2, MS4A7 </span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  FTL.1, FTH1.1, LST1.1, PSAP.1, CTSS.1, COTL1.1, CST3.1, AIF1.1, TYROBP.1, FCGR3A.1 </span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IFITM3.1, SERPINA1.1, SAT1.1, FCER1G.1, CDKN1C.1, MS4A7.1, LYN.1, MAFB.1, PECAM1.1, S100A6.1 </span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CD68.1, NEAT1.1, TNFRSF1B.1, SPI1.1, S100A4.1, CEBPB.1, HCK.1, POU2F2.1, NAP1L1.1, LINC01272.1 </span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 2 </span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  CD79A.1, HLA.DRA.2, CD79A.2, CD74.2, MS4A1.2, MS4A1.1, IGHM.1, IGHM.2, BANK1.2, CCL5.2 </span></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     HLA.DPB1.2, NKG7.2, HLA.DRB1.2, IGKC.2, CD37.2, IGKC.1, HLA.DPA1.2, IGHD.1, IGHD.2, LTB.1 </span></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CST7.2, IGHG1.1, BANK1.1, IGLC2.2, IGLC2.1, GZMH.2, IGLC3.2, IGLC3.1, PFN1.2, IL32.2 </span></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CD74, HLA.DRA, CD79A, MS4A1, IGHM, HLA.DPA1, CCL5.1, BANK1, CCL5, NKG7 </span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     HLA.DRB1, IGKC, CD37, HLA.DPB1, LTB, IGHD, RPLP1, RPS21, PFN1, CST7 </span></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGLC2, CST7.1, GZMH.1, CALM1, IGLC3, RPS6, NKG7.1, GZMH, TCL1A, IGHG1 </span></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 3 </span></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPS3.2, S100A4.2, SRGN.2, RPS26.2, MALAT1, RPS6.2, MALAT1.2, ETS1.2, CD52.2, CXCR4.2 </span></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS15A.2, PTP4A2.2, TRBC1.2, RPLP1.2, IL32.2, RPS21.2, ID2.2, RPS10.2, GZMA.2, GZMH.2 </span></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     HLA.DPB1, CD8B.2, CD8A.2, TRBC2.2, SYNE2.2, RPS5.2, CALM1.2, DUSP1.2, CST7.2, CXCR4 </span></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CALM1.1, MALAT1.1, CD52.1, IL32, RPS15A.1, HLA.DPB1.1, PFN1.1, RPS5.1, RPS3.1, RPS26.1 </span></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPLP1.1, RPS21.1, RPS6.1, GZMA, NKG7.1, TRBC1.1, CXCR4.1, ETS1.1, GZMH, SYNE2.1 </span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CD8A, HLA.DPA1.1, S100A6, CD8B.1, CST7.1, TRBC2.1, PRF1, BIRC3.1, RPS10.1, FOS.2 </span></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 4 </span></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPLP1, RPS6, RPS15A, RPS21, RPS26, IL7R.2, IGHD.1, IGHD.2, RPS10, RPS3 </span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     GZMH, FCRL5.1, FCRL5.2, IGHM.2, CXCR4.1, NEAT1.2, IL4R.2, NEAT1, GZMH.1, IGHM.1 </span></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IL4R.1, DUSP1.2, DUSP1, TCL1A.2, TCL1A.1, CD247.2, PTP4A2.2, S100A6.1, RPS5, TNFRSF13C.2 </span></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPS21.2, IGHD, IL7R.1, RPLP1.2, RPS6.2, GZMH.2, IL7R, FCRL5, IGHM, RPS26.1 </span></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CXCR4.2, NEAT1.1, RPS10.1, IL4R, CXCR4, DUSP1.1, RPS6.1, S100A6.2, RPS5.2, TCL1A </span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS21.1, CD247, RPS15A.2, PFN1.1, CD247.1, RPS10.2, RPLP1.1, FOS.1, RPS15A.1, RPS3.2 </span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 5 </span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RP5.887A10.1, TCL1A.2, TCL1A.1, IGHD.1, IGHD.2, IGHG1, IL4R.2, IL4R.1, IGLC2, NEAT1.1 </span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     BANK1, IGHM.1, IGLC3, IGHM.2, MS4A1, BIRC3, IGKC.1, FCRL5.1, FCRL5.2, FOS.1 </span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CD68, CD68.2, CXCR4.2, IGKC.2, CD37.1, PTP4A2.1, S100A6.2, MALAT1, ARL4C, LINC01272.2 </span></span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RP5.887A10.1.2, RP5.887A10.1.1, TCL1A, IGHG1.1, IGHD, IL4R, IGLC2.1, IGLC2.2, NEAT1, NEAT1.2 </span></span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGHM, IGLC3.1, IGLC3.2, BANK1.2, BIRC3.1, BANK1.1, MS4A1.1, IGHG1.2, MS4A1.2, ETS1 </span></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FCRL5, IGKC, CD68.1, MALAT1.1, FOS, LINC01272.1, HLA.DRB1.1, PTP4A2.2, PTP4A2, DUSP1.2</span></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Non-unique features (rownames) present in the input matrix, making</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unique</span></span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Centering and scaling data matrix</span></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 1 </span></span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  LST1, LST1.2, CTSS.2, PSAP, PSAP.2, CTSS, COTL1.2, CST3, COTL1, CST3.2 </span></span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     AIF1.2, IFITM3, FCGR3A, SERPINA1, SERPINA1.2, IFITM3.2, SAT1, FTL.2, TYROBP, FCER1G </span></span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     SAT1.2, TYROBP.2, FTH1, FTH1.2, CDKN1C.2, LYN.2, FCER1G.2, AIF1, MAFB, MAFB.2 </span></span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  LST1.1, FTH1.1, FTL.1, PSAP.1, CTSS.1, COTL1.1, CST3.1, TYROBP.1, AIF1.1, IFITM3.1 </span></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FCGR3A.1, SERPINA1.1, SAT1.1, FCER1G.1, LYN.1, CDKN1C.1, MAFB.1, MS4A7.1, PECAM1.1, TNFRSF1B.1 </span></span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     S100A6.1, CEBPB.1, CD68.1, NEAT1.1, SPI1.1, S100A4.1, HCK.1, POU2F2.1, FCN1.1, LINC01272.1 </span></span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 2 </span></span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  CD79A.2, CD79A.1, CD74.2, HLA.DRA.2, MS4A1.1, IGHM.2, MS4A1.2, IGHM.1, HLA.DRB1.2, BANK1.2 </span></span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CCL5.2, HLA.DPA1.2, NKG7.2, HLA.DPB1.2, IGKC.1, CD37.2, IGHD.2, IGHD.1, IGKC.2, BANK1.1 </span></span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     LTB.1, HLA.DPB1.1, IGHG1.2, IGHG1.1, CST7.2, LTB.2, PFN1.2, IGLC2.1, IGLC2.2, CALM1.2 </span></span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CD74, HLA.DRA, CD79A, MS4A1, IGHM, CCL5.1, BANK1, HLA.DPA1, NKG7, HLA.DRB1 </span></span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     HLA.DPB1, IGKC, IGHD, CCL5, CD37, LTB, RPLP1, NKG7.1, RPS21, PFN1 </span></span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGHG1, CST7, CST7.1, IGLC2, RPS6, GZMH.1, CALM1, IGLC3, IL32, TCL1A </span></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 3 </span></span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  S100A4.2, RPS3.2, CXCR4.2, RPS15A.2, RPS6.2, SRGN.2, CD52.2, ID2.2, IL32.2, PTP4A2.2 </span></span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     GZMH.2, RPS21.2, RPLP1.2, GZMA.2, RPS26.2, ETS1.2, TRBC2.2, TRBC2, RPS10.2, SYNE2.2 </span></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     MALAT1.2, NAP1L1, CD8A.2, TRBC1.2, HCK.1, CD8B.2, HLA.DPA1, S100A6.2, CXCR4, CST7.2 </span></span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPS15A.1, IL32.1, CD52.1, TRBC2.1, CXCR4.1, RPS3.1, SYNE2, GZMH, RPS26.1, IL32 </span></span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     HLA.DPA1.1, RPS5.1, GZMA, RPS21.1, RPS6.1, RPLP1.1, GZMA.1, GZMH.1, CD37.1, CD8A.1 </span></span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TRBC1.1, CD8B, RPS10.1, CALM1.1, HCK, HCK.2, MALAT1.1, CST7, TNFRSF1B, PFN1.1 </span></span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 4 </span></span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPS21.2, RPLP1.2, RPS15A.2, RPS6.2, IGHD, RPS3.2, NEAT1.1, FOS.1, IGHM, RPS26.2 </span></span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     DUSP1.1, FCRL5, RPS26.1, GZMH.2, CXCR4.2, RPLP1.1, S100A6.2, RPS10.2, RPS21.1, RPS10.1 </span></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IL7R.1, TCL1A, RPS3.1, RPS6.1, CXCR4, RPS5.2, CD247.1, BIRC3, PRF1, PRF1.1 </span></span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPLP1, RPS6, RPS21, RPS3, RPS26, RPS15A, IGHD.2, IGHD.1, RPS10, CXCR4.1 </span></span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NEAT1.2, IGHM.2, IGHM.1, GZMH, FCRL5.2, FCRL5.1, DUSP1.2, FOS, DUSP1, NEAT1 </span></span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     MALAT1, TCL1A.2, TCL1A.1, FOS.2, S100A6.1, RPS5, IL7R.2, BIRC3.1, IL4R.1, CD247.2 </span></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 5 </span></span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RP5.887A10.1.2, RP5.887A10.1.1, IGHG1.2, IGHG1.1, TCL1A, IGHD, NEAT1.2, IGLC2.1, IGLC2.2, IGHM </span></span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NEAT1, LINC01272.1, FCRL5, ZBTB7A, ZBTB7A.2, IGKC, DUSP1.2, HLA.DRB1.1, BANK1.1, PFN1.1 </span></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     MS4A1.2, IGLC3.2, IGLC3.1, BANK1.2, DUSP1, CALM1.1, CD68.1, FOS, MS4A1.1, FOS.2 </span></span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RP5.887A10.1, IGHG1, TCL1A.2, TCL1A.1, IGHD.1, IGHD.2, NEAT1.1, IGLC2, IGHM.2, IGHM.1 </span></span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IL4R.1, LINC01272, LINC01272.2, ZBTB7A.1, FCRL5.2, FCRL5.1, IGKC.2, IGKC.1, BANK1, FOS.1 </span></span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     DUSP1.1, IGLC3, MS4A1, CD68.2, CD68, NAP1L1, HLA.DPA1.2, GZMB.1, CD247, PTP4A2.1</span></span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Non-unique features (rownames) present in the input matrix, making</span></span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unique</span></span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Centering and scaling data matrix</span></span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 1 </span></span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  FTL.1, FTH1.1, PSAP.1, CTSS.1, LST1.1, COTL1.1, CST3.1, AIF1.1, TYROBP.1, SERPINA1.1 </span></span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FCGR3A.1, IFITM3.1, SAT1.1, FCER1G.1, CDKN1C.1, MS4A7.1, MAFB.1, TNFRSF1B.1, LYN.1, PECAM1.1 </span></span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     S100A6.1, CD68.1, NEAT1.1, SPI1.1, S100A4.1, CEBPB.1, HCK.1, FCN1.1, POU2F2.1, LINC01272.1 </span></span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  PSAP, PSAP.2, LST1.2, LST1, CTSS, CTSS.2, CST3.2, CST3, COTL1, COTL1.2 </span></span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FTL.2, AIF1.2, AIF1, IFITM3, TYROBP, SERPINA1.2, SERPINA1, FCGR3A, SAT1.2, FTL </span></span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FTH1.2, TYROBP.2, SAT1, FCER1G, FCER1G.2, CDKN1C.2, CDKN1C, IFITM3.2, MS4A7.2, MS4A7 </span></span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 2 </span></span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  CD74.2, CD79A.2, CD79A.1, HLA.DRA.2, MS4A1.2, MS4A1.1, IGHM.1, IGHM.2, CCL5.2, NKG7.2 </span></span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     HLA.DRB1.2, BANK1.2, BANK1.1, HLA.DPB1.2, CD37.2, RPS21.2, IGKC.2, IGHD.2, IGHD.1, CST7.2 </span></span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CD37.1, HLA.DPA1.2, IGKC.1, LTB.1, LTB.2, IGHG1.2, IGHG1.1, RPLP1.2, GZMH.2, IGLC2.1 </span></span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CD74, HLA.DRA, CD79A, MS4A1, IGHM, CCL5, NKG7.1, NKG7, HLA.DPB1, BANK1 </span></span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     HLA.DPA1, CD37, CCL5.1, IGKC, HLA.DRB1, IGHD, LTB, CST7.1, CST7, RPLP1 </span></span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS21, PFN1, GZMH, IGHG1, IL32.1, IGLC2, RPS6, IL32, IGLC3, FGFBP2.1 </span></span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 3 </span></span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPS15A.1, HLA.DPB1.1, RPS6.1, RPS26.1, RPS5.1, SYNE2, CD52.1, HLA.DPA1.1, RPS3.1, GZMH.1 </span></span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IL32.1, PFN1.1, RPS21.1, CXCR4.1, TRBC2.1, IL32, ID2, TRBC1.1, SYNE2.1, RPLP1.1 </span></span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CALM1.1, ETS1.1, GZMB, GZMH, GZMA.1, FOS.2, HCK, CD8A.1, TNFRSF1B, LTB.2 </span></span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  S100A4.2, PTP4A2.2, RPS26.2, RPS6.2, SRGN.2, ID2.2, RPS15A.2, CD52.2, CXCR4.2, SYNE2.2 </span></span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NAP1L1, ETS1.2, GZMH.2, RPS3.2, IL32.2, RPS5.2, S100A6.2, TRBC1.2, DUSP1.2, IL7R.2 </span></span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS15A, RPS10.2, HCK.1, HLA.DPA1, HLA.DPB1, MS4A7.1, FTH1.2, CST7.2, LINC01272.1, GZMA.2 </span></span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 4 </span></span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPLP1.2, RPS21.2, RPS3.2, RPS15A.2, RPLP1.1, IL7R, RPS10.1, RPS10.2, IGHD, GZMH.2 </span></span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS6.2, RPS21.1, IGHM, RPS5.2, RPS26.1, FCRL5, RPS3.1, NEAT1.1, GZMB.2, CXCR4.2 </span></span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TRBC2, RPS6.1, DUSP1.1, S100A6.2, RPS26.2, TNFRSF13C, CD247.1, PRF1, PRF1.1, GNLY.2 </span></span>
+<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPLP1, RPS21, RPS6, RPS3, RPS26, RPS15A, RPS10, GZMH.1, IGHD.2, IGHD.1 </span></span>
+<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGHM.1, IGHM.2, FCRL5.1, FCRL5.2, IL7R.2, GZMB, GZMH, CXCR4.1, NEAT1.2, S100A6.1 </span></span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NEAT1, RPS5, DUSP1, DUSP1.2, TNFRSF13C.1, TNFRSF13C.2, GNLY, PRF1.2, GZMB.1, CD247.2 </span></span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 5 </span></span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  IGHG1.1, IGHG1.2, RP5.887A10.1.1, RP5.887A10.1.2, TCL1A, IGLC2.1, IGLC2.2, IGHD, IGLC3.1, IGLC3.2 </span></span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IL4R, IGKC, NEAT1.2, IGHM, HLA.DRB1.1, NEAT1, FCRL5, MS4A1.2, MS4A1.1, ZBTB7A.2 </span></span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     BANK1.2, BANK1.1, CALM1.1, PTP4A2, LINC01272.1, PFN1.2, MALAT1.2, CD68.1, FOS.2, ZBTB7A </span></span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  IGHG1, RP5.887A10.1, TCL1A.2, TCL1A.1, IGLC2, IGHD.2, IGHD.1, IGLC3, IL4R.1, IGKC.2 </span></span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IL4R.2, IGKC.1, IGHM.1, IGHM.2, NEAT1.1, FCRL5.2, FCRL5.1, MS4A1, BANK1, TRBC2 </span></span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FOS.1, ZBTB7A.1, LINC01272.2, LINC01272, NAP1L1, PTP4A2.1, CD68, CD68.2, HLA.DRB1.2, S100A6.2</span></span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Non-unique features (rownames) present in the input matrix, making</span></span>
+<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unique</span></span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Centering and scaling data matrix</span></span>
+<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 1 </span></span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  LST1, LST1.2, PSAP.2, CTSS, PSAP, CTSS.2, COTL1.2, CST3, CST3.2, COTL1 </span></span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     AIF1.2, AIF1, FCGR3A, SERPINA1, SERPINA1.2, TYROBP, IFITM3, SAT1.2, FCER1G, SAT1 </span></span>
+<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CDKN1C.2, LYN.2, FTH1.2, CDKN1C, MS4A7.2, FCER1G.2, TYROBP.2, FTH1, MAFB, MAFB.2 </span></span>
+<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  FTL.1, LST1.1, FTH1.1, PSAP.1, CTSS.1, COTL1.1, CST3.1, AIF1.1, TYROBP.1, SERPINA1.1 </span></span>
+<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FCGR3A.1, IFITM3.1, SAT1.1, FCER1G.1, CDKN1C.1, MS4A7.1, LYN.1, MAFB.1, S100A6.1, PECAM1.1 </span></span>
+<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TNFRSF1B.1, CEBPB.1, CD68.1, NEAT1.1, SPI1.1, S100A4.1, HCK.1, POU2F2.1, LINC01272.1, FCN1.1 </span></span>
+<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 2 </span></span>
+<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  CD74, HLA.DRA, CD79A, IGHM, MS4A1, CCL5.1, CCL5, NKG7.1, BANK1, NKG7 </span></span>
+<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     HLA.DRB1, IGKC, CD37, HLA.DPA1, IGHD, RPLP1, HLA.DPB1, LTB, CST7, RPS21 </span></span>
+<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CST7.1, PFN1, IGHG1, GZMH.1, IGLC2, RPS6, IGLC3, GZMA, RPS5, FGFBP2 </span></span>
+<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CD79A.2, CD79A.1, HLA.DRA.2, IGHM.2, IGHM.1, MS4A1.2, MS4A1.1, CD74.2, CCL5.2, NKG7.2 </span></span>
+<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     BANK1.1, BANK1.2, HLA.DRB1.2, IGKC.2, IGKC.1, HLA.DPB1.2, IGHD.2, IGHD.1, HLA.DPA1.2, LTB.2 </span></span>
+<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CST7.2, LTB.1, IGHG1.1, IGHG1.2, GZMH.2, RPS21.2, IGLC2.2, IGLC2.1, RPLP1.2, IGLC3.1 </span></span>
+<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 3 </span></span>
+<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  CALM1.1, RPS15A.1, RPS26.1, HLA.DPB1.1, IL32.1, CD52.1, RPS6.1, PFN1.1, RPS3.1, RPLP1.1 </span></span>
+<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IL32, RPS5.1, SYNE2, GZMH, ID2.1, RPS21.1, CD37.1, TRBC1, HLA.DPA1.1, CD8B </span></span>
+<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TRBC2.1, HLA.DRB1.1, CD8A.1, SRGN.1, TRBC1.1, GZMH.1, ETS1, S100A6, GZMA, TNFRSF1B </span></span>
+<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPS3.2, RPS6.2, S100A4.2, RPS15A.2, IL32.2, MALAT1, SRGN.2, CD52.2, RPS26.2, RPS5.2 </span></span>
+<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ETS1.2, SYNE2.2, GZMH.2, RPS21.2, ID2.2, S100A6.2, TRBC1.2, RPLP1.2, HLA.DPB1, HLA.DPA1 </span></span>
+<span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TRBC2.2, DUSP1, PTP4A2.2, CALM1.2, CD8B.2, FTL.2, CD8A.2, TNFRSF1B.1, GZMA.2, HCK.1 </span></span>
+<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 4 </span></span>
+<span id="cb4-198"><a href="#cb4-198" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPLP1.2, RPS21.2, IL7R, RPS15A.2, RPS10.2, IGHD, GZMH.2, IL7R.1, RPS21.1, DUSP1.1 </span></span>
+<span id="cb4-199"><a href="#cb4-199" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGHM, RPLP1.1, RPS6.2, NEAT1.1, RPS3.2, RPS10.1, FCRL5, RPS26.2, RPS26.1, GZMB.2 </span></span>
+<span id="cb4-200"><a href="#cb4-200" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS6.1, S100A6.2, IL4R, FTL.2, RPS3.1, RPS5.2, IGKC, CD247.1, FOS.1, CXCR4.2 </span></span>
+<span id="cb4-201"><a href="#cb4-201" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPLP1, RPS21, RPS15A, RPS6, RPS26, RPS3, RPS10, IL7R.2, IGHD.2, IGHD.1 </span></span>
+<span id="cb4-202"><a href="#cb4-202" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     GZMH, IGHM.2, NEAT1.2, DUSP1.2, IGHM.1, DUSP1, GZMH.1, FCRL5.1, FCRL5.2, GZMB.1 </span></span>
+<span id="cb4-203"><a href="#cb4-203" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CXCR4.1, NEAT1, MALAT1.2, IL4R.1, IL4R.2, S100A6.1, PTP4A2.2, ZBTB7A, RPS5, IL32.1 </span></span>
+<span id="cb4-204"><a href="#cb4-204" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 5 </span></span>
+<span id="cb4-205"><a href="#cb4-205" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  IGLC2, IGLC3, IGHG1, RP5.887A10.1, IL4R.1, IL4R.2, IGHD.1, IGHD.2, IGKC.2, IGKC.1 </span></span>
+<span id="cb4-206"><a href="#cb4-206" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NEAT1.1, TCL1A.1, FCRL5.1, FCRL5.2, FOS.1, IGHM.1, ZBTB7A.1, IGHM.2, LINC01272, LINC01272.2 </span></span>
+<span id="cb4-207"><a href="#cb4-207" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     PTP4A2.1, MS4A1, DUSP1.1, BANK1, CD68.2, CD68, FCER1G.2, S100A6.2, FCER1G, MALAT1.1 </span></span>
+<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  IGLC2.2, IGLC2.1, IGLC3.1, IGLC3.2, IGHG1.2, IGHG1.1, RP5.887A10.1.2, RP5.887A10.1.1, IL4R, IGHD </span></span>
+<span id="cb4-209"><a href="#cb4-209" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGKC, NEAT1.2, FCRL5, NEAT1, IGHM, FOS.2, PTP4A2, ZBTB7A.2, LINC01272.1, MS4A1.1 </span></span>
+<span id="cb4-210"><a href="#cb4-210" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     DUSP1, FOS, ZBTB7A, MS4A1.2, DUSP1.2, PTP4A2.2, ETS1, BANK1.1, CD68.1, BANK1.2</span></span>
+<span id="cb4-211"><a href="#cb4-211" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Non-unique features (rownames) present in the input matrix, making</span></span>
+<span id="cb4-212"><a href="#cb4-212" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unique</span></span>
+<span id="cb4-213"><a href="#cb4-213" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Centering and scaling data matrix</span></span>
+<span id="cb4-214"><a href="#cb4-214" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 1 </span></span>
+<span id="cb4-215"><a href="#cb4-215" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  LST1, LST1.2, PSAP, COTL1.2, PSAP.2, COTL1, CST3, CST3.2, CTSS.2, CTSS </span></span>
+<span id="cb4-216"><a href="#cb4-216" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     AIF1.2, FCGR3A, IFITM3, TYROBP.2, SERPINA1, SERPINA1.2, TYROBP, IFITM3.2, SAT1.2, SAT1 </span></span>
+<span id="cb4-217"><a href="#cb4-217" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FTH1.2, FTL.2, LYN.2, CDKN1C.2, CDKN1C, AIF1, FCER1G, MS4A7, MS4A7.2, MAFB </span></span>
+<span id="cb4-218"><a href="#cb4-218" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  FTL.1, FTH1.1, LST1.1, PSAP.1, COTL1.1, CTSS.1, CST3.1, IFITM3.1, AIF1.1, TYROBP.1 </span></span>
+<span id="cb4-219"><a href="#cb4-219" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     SERPINA1.1, FCGR3A.1, SAT1.1, FCER1G.1, CDKN1C.1, MS4A7.1, MAFB.1, LYN.1, PECAM1.1, CEBPB.1 </span></span>
+<span id="cb4-220"><a href="#cb4-220" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TNFRSF1B.1, CD68.1, NEAT1.1, S100A6.1, SPI1.1, S100A4.1, HCK.1, POU2F2.1, LINC01272.1, FCN1.1 </span></span>
+<span id="cb4-221"><a href="#cb4-221" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 2 </span></span>
+<span id="cb4-222"><a href="#cb4-222" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  CD74, HLA.DRA, CD79A, IGHM, MS4A1, CCL5, CCL5.1, NKG7, BANK1, HLA.DPA1 </span></span>
+<span id="cb4-223"><a href="#cb4-223" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGKC, HLA.DRB1, HLA.DPB1, CD37, IGHD, CST7, CST7.1, LTB, RPLP1, RPS21 </span></span>
+<span id="cb4-224"><a href="#cb4-224" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     PFN1, IGHG1, GZMH, IL32, IGLC2, RPS6, IGLC3, FGFBP2.1, FGFBP2, GZMA </span></span>
+<span id="cb4-225"><a href="#cb4-225" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CD74.2, CD79A.1, CD79A.2, HLA.DRA.2, IGHM.2, IGHM.1, MS4A1.1, MS4A1.2, CCL5.2, BANK1.1 </span></span>
+<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     BANK1.2, HLA.DPB1.2, NKG7.2, HLA.DRB1.2, IGKC.1, IGKC.2, RPS21.2, IGHD.1, IGHD.2, CST7.2 </span></span>
+<span id="cb4-227"><a href="#cb4-227" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     LTB.1, LTB.2, CD37.2, GZMH.2, IGHG1.1, IGHG1.2, CD37.1, HLA.DPA1.2, IGLC2.2, IGLC2.1 </span></span>
+<span id="cb4-228"><a href="#cb4-228" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 3 </span></span>
+<span id="cb4-229"><a href="#cb4-229" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPS15A.1, CD52.1, NKG7.1, RPLP1.1, CALM1.1, HLA.DPB1.1, CXCR4.1, RPS5.1, TRBC1.1, GZMH.1 </span></span>
+<span id="cb4-230"><a href="#cb4-230" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     SYNE2, S100A6, RPS6.1, HLA.DPA1.1, TRBC1, IL32, PFN1.1, TRBC2.1, RPS21.1, ID2 </span></span>
+<span id="cb4-231"><a href="#cb4-231" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS26.1, RPS3.1, GZMH, IL7R, GZMA, IL7R.1, CD37.1, HLA.DPB1.2, IL32.1, GZMA.1 </span></span>
+<span id="cb4-232"><a href="#cb4-232" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CD52.2, S100A4.2, SRGN.2, CXCR4.2, RPS15A.2, RPS3.2, RPS10.2, S100A6.2, RPS6.2, TRBC1.2 </span></span>
+<span id="cb4-233"><a href="#cb4-233" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ID2.2, GZMH.2, RPLP1.2, IL32.2, HLA.DPB1, SYNE2.2, RPS26.2, ETS1.2, IL7R.2, ID2.1 </span></span>
+<span id="cb4-234"><a href="#cb4-234" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NAP1L1, GZMA.2, NKG7.2, CXCR4, TRBC2.2, CST7.2, HCK.1, GNAI2.2, LTB, CD8A.2 </span></span>
+<span id="cb4-235"><a href="#cb4-235" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 4 </span></span>
+<span id="cb4-236"><a href="#cb4-236" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPS26, RPLP1, RPS21, RPS15A, RPS6, RPS3, IGHD.2, IGHD.1, CXCR4.1, FOS.2 </span></span>
+<span id="cb4-237"><a href="#cb4-237" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IL4R.2, DUSP1, GZMH.1, IGHM.2, IL4R.1, IGHM.1, NEAT1.2, FCRL5.2, FCRL5.1, IL7R.2 </span></span>
+<span id="cb4-238"><a href="#cb4-238" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NEAT1, DUSP1.2, CD247.2, RPS10, GZMH, MALAT1.2, FOS, RPS5, PRF1.2, TCL1A.2 </span></span>
+<span id="cb4-239"><a href="#cb4-239" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPS21.2, RPLP1.2, RPS15A.2, RPS6.2, RPS26.2, RPS3.2, RPS26.1, IGHD, RPS3.1, IL7R.1 </span></span>
+<span id="cb4-240"><a href="#cb4-240" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS21.1, RPS5.2, DUSP1.1, IL4R, RPS6.1, IGHM, FOS.1, NEAT1.1, CXCR4.2, FCRL5 </span></span>
+<span id="cb4-241"><a href="#cb4-241" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPLP1.1, GZMH.2, CXCR4, CD247, CD247.1, S100A6.2, MALAT1.1, PRF1, PRF1.1, TCL1A </span></span>
+<span id="cb4-242"><a href="#cb4-242" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 5 </span></span>
+<span id="cb4-243"><a href="#cb4-243" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  TCL1A, RP5.887A10.1.2, RP5.887A10.1.1, IGHG1.2, IGHG1.1, IGHD, IGLC2.2, IGLC2.1, IL4R, IGLC3.2 </span></span>
+<span id="cb4-244"><a href="#cb4-244" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGLC3.1, NEAT1.2, NEAT1, IGHM, FCRL5, FOS, FOS.2, IGKC, MALAT1.2, CD68.1 </span></span>
+<span id="cb4-245"><a href="#cb4-245" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     BANK1.2, BANK1.1, LINC01272.1, MS4A1.2, MS4A1.1, ZBTB7A.2, DUSP1.2, CALM1.1, ZBTB7A, PTP4A2.2 </span></span>
+<span id="cb4-246"><a href="#cb4-246" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  TCL1A.1, TCL1A.2, RP5.887A10.1, IGHG1, IGHD.2, IGHD.1, IGLC2, IL4R.2, IL4R.1, IGLC3 </span></span>
+<span id="cb4-247"><a href="#cb4-247" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NEAT1.1, IGHM.1, FOS.1, IGHM.2, FCRL5.2, FCRL5.1, IGKC.1, IGKC.2, CD68, CD68.2 </span></span>
+<span id="cb4-248"><a href="#cb4-248" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TRBC2, BANK1, LINC01272.2, LINC01272, MS4A1, ZBTB7A.1, S100A6.2, SYNE2.2, CXCR4.2, NAP1L1</span></span>
+<span id="cb4-249"><a href="#cb4-249" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Non-unique features (rownames) present in the input matrix, making</span></span>
+<span id="cb4-250"><a href="#cb4-250" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unique</span></span>
+<span id="cb4-251"><a href="#cb4-251" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Centering and scaling data matrix</span></span>
+<span id="cb4-252"><a href="#cb4-252" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 1 </span></span>
+<span id="cb4-253"><a href="#cb4-253" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  LST1.2, LST1, PSAP, PSAP.2, CTSS.2, CTSS, CST3, COTL1.2, FTL.2, CST3.2 </span></span>
+<span id="cb4-254"><a href="#cb4-254" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     AIF1.2, TYROBP, SERPINA1, SERPINA1.2, AIF1, FTL, FCGR3A, SAT1.2, SAT1, IFITM3 </span></span>
+<span id="cb4-255"><a href="#cb4-255" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     COTL1, FCER1G, LYN.2, CDKN1C.2, CDKN1C, FTH1.2, MS4A7.2, TYROBP.2, MAFB, MAFB.2 </span></span>
+<span id="cb4-256"><a href="#cb4-256" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  FTL.1, FTH1.1, LST1.1, PSAP.1, CTSS.1, COTL1.1, CST3.1, AIF1.1, TYROBP.1, IFITM3.1 </span></span>
+<span id="cb4-257"><a href="#cb4-257" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     SERPINA1.1, FCGR3A.1, SAT1.1, FCER1G.1, LYN.1, CDKN1C.1, MAFB.1, PECAM1.1, TNFRSF1B.1, S100A6.1 </span></span>
+<span id="cb4-258"><a href="#cb4-258" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     MS4A7.1, CD68.1, CEBPB.1, NEAT1.1, SPI1.1, S100A4.1, HCK.1, POU2F2.1, LINC01272.1, NAP1L1.1 </span></span>
+<span id="cb4-259"><a href="#cb4-259" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 2 </span></span>
+<span id="cb4-260"><a href="#cb4-260" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  CD79A.2, CD79A.1, HLA.DRA.2, MS4A1.1, MS4A1.2, IGHM.2, IGHM.1, CD74.2, CCL5.2, BANK1.1 </span></span>
+<span id="cb4-261"><a href="#cb4-261" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     BANK1.2, HLA.DPB1.2, NKG7.2, HLA.DRA.1, HLA.DPA1.2, IGHD.1, IGHD.2, IGKC.2, HLA.DRB1.2, IGKC.1 </span></span>
+<span id="cb4-262"><a href="#cb4-262" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     LTB.1, LTB.2, CD37.2, CST7.2, IGHG1.1, IGHG1.2, IGLC2.2, IGLC2.1, IGLC3.2, IGLC3.1 </span></span>
+<span id="cb4-263"><a href="#cb4-263" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CD74, CD79A, HLA.DRA, MS4A1, IGHM, CCL5, BANK1, NKG7, NKG7.1, HLA.DPB1 </span></span>
+<span id="cb4-264"><a href="#cb4-264" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CCL5.1, IGKC, IGHD, HLA.DPA1, HLA.DRB1, LTB, RPLP1, CD37, RPS21, IGHG1 </span></span>
+<span id="cb4-265"><a href="#cb4-265" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CST7, CST7.1, IGLC2, PFN1, RPS6, GZMH.1, IGLC3, CALM1, TCL1A, IL32.1 </span></span>
+<span id="cb4-266"><a href="#cb4-266" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 3 </span></span>
+<span id="cb4-267"><a href="#cb4-267" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPS3.2, RPS6.2, SRGN.2, CD52.2, RPS15A.2, S100A4.2, ETS1.2, RPS26.2, ID2.2, MALAT1 </span></span>
+<span id="cb4-268"><a href="#cb4-268" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     PTP4A2.2, RPS21.2, TRBC2.2, CXCR4.2, CALM1.2, GZMH.2, RPLP1.2, SYNE2.2, NAP1L1, RPS10.2 </span></span>
+<span id="cb4-269"><a href="#cb4-269" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     PFN1, S100A6.2, IL32.2, CD8B.2, GZMA.2, TRBC1.2, HLA.DPA1, DUSP1, CST7.2, FOS.1 </span></span>
+<span id="cb4-270"><a href="#cb4-270" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CD52.1, RPS3.1, RPS15A.1, RPS10.1, PFN1.1, RPS26.1, HLA.DPB1.1, RPS21.1, CALM1.1, RPLP1.1 </span></span>
+<span id="cb4-271"><a href="#cb4-271" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS5.1, RPS6.1, SYNE2.1, CD37.1, GZMH, ID2, TRBC2.1, S100A6, CD8B, HLA.DPA1.1 </span></span>
+<span id="cb4-272"><a href="#cb4-272" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IL32.1, GZMA, GZMH.1, IL32, FOS, PTP4A2.1, GZMA.1, CST7.1, TRBC1.1, HCK.2 </span></span>
+<span id="cb4-273"><a href="#cb4-273" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 4 </span></span>
+<span id="cb4-274"><a href="#cb4-274" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPLP1.2, IGHD, IL7R.1, RPS15A.2, IL7R, RPS21.2, IGHM, IL4R, GZMH.2, CXCR4.2 </span></span>
+<span id="cb4-275"><a href="#cb4-275" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TCL1A, NEAT1.1, FOS.1, FCRL5, RPS6.2, DUSP1.1, RPS5.2, PFN1.1, RPS10.2, RPS26.2 </span></span>
+<span id="cb4-276"><a href="#cb4-276" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPLP1.1, RPS26.1, ZBTB7A.1, CD247.1, CD247, RPS6.1, S100A6.2, PTP4A2.1, MALAT1.1, RPS3.2 </span></span>
+<span id="cb4-277"><a href="#cb4-277" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPLP1, RPS15A, IGHD.1, IGHD.2, RPS26, IL7R.2, RPS21, RPS6, IGHM.2, IGHM.1 </span></span>
+<span id="cb4-278"><a href="#cb4-278" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IL4R.2, IL4R.1, GZMH, RPS10, CXCR4.1, TCL1A.1, TCL1A.2, NEAT1, RPS3, FCRL5.1 </span></span>
+<span id="cb4-279"><a href="#cb4-279" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FCRL5.2, GZMH.1, FOS.2, NEAT1.2, DUSP1.2, DUSP1, PTP4A2.2, ZBTB7A.2, MALAT1.2, PFN1 </span></span>
+<span id="cb4-280"><a href="#cb4-280" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 5 </span></span>
+<span id="cb4-281"><a href="#cb4-281" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  IGHG1, RP5.887A10.1, TCL1A.2, TCL1A.1, IGHD.1, IGHD.2, IL4R.2, IL4R.1, NEAT1.1, IGLC2 </span></span>
+<span id="cb4-282"><a href="#cb4-282" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     BANK1, MS4A1, ZBTB7A.1, IGHM.1, IGHM.2, LINC01272.2, LINC01272, FCRL5.2, FCRL5.1, DUSP1.1 </span></span>
+<span id="cb4-283"><a href="#cb4-283" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     PTP4A2.1, NAP1L1, HLA.DRB1.2, CD68, CD68.2, BIRC3, S100A6.2, FOS.1, IGLC3, FCER1G </span></span>
+<span id="cb4-284"><a href="#cb4-284" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  IGHG1.2, IGHG1.1, RP5.887A10.1.1, RP5.887A10.1.2, TCL1A, IGHD, IL4R, NEAT1.2, IGLC2.1, IGLC2.2 </span></span>
+<span id="cb4-285"><a href="#cb4-285" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NEAT1, MS4A1.2, BANK1.2, BANK1.1, HLA.DRB1.1, MS4A1.1, IGHM, ZBTB7A.2, LINC01272.1, DUSP1.2 </span></span>
+<span id="cb4-286"><a href="#cb4-286" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     BIRC3.1, FCRL5, ZBTB7A, PTP4A2, MALAT1.2, DUSP1, CD68.1, PFN1.2, IGLC3.1, IGLC3.2</span></span>
+<span id="cb4-287"><a href="#cb4-287" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Non-unique features (rownames) present in the input matrix, making</span></span>
+<span id="cb4-288"><a href="#cb4-288" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unique</span></span>
+<span id="cb4-289"><a href="#cb4-289" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Centering and scaling data matrix</span></span>
+<span id="cb4-290"><a href="#cb4-290" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 1 </span></span>
+<span id="cb4-291"><a href="#cb4-291" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  LST1.1, FTL.1, PSAP.1, CTSS.1, FTH1.1, COTL1.1, CST3.1, AIF1.1, SERPINA1.1, TYROBP.1 </span></span>
+<span id="cb4-292"><a href="#cb4-292" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FCGR3A.1, SAT1.1, IFITM3.1, FCER1G.1, CDKN1C.1, MAFB.1, LYN.1, TNFRSF1B.1, MS4A7.1, S100A6.1 </span></span>
+<span id="cb4-293"><a href="#cb4-293" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     PECAM1.1, NEAT1.1, CD68.1, CEBPB.1, S100A4.1, SPI1.1, HCK.1, FCN1.1, NAP1L1.1, LINC01272.1 </span></span>
+<span id="cb4-294"><a href="#cb4-294" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  LST1.2, LST1, PSAP.2, CTSS.2, CST3.2, CST3, CTSS, PSAP, COTL1.2, AIF1.2 </span></span>
+<span id="cb4-295"><a href="#cb4-295" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TYROBP, SERPINA1, SERPINA1.2, IFITM3, AIF1, FCGR3A, SAT1, COTL1, SAT1.2, FTL.2 </span></span>
+<span id="cb4-296"><a href="#cb4-296" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TYROBP.2, FTH1, FCER1G, FTL, FTH1.2, CDKN1C, LYN.2, MS4A7.2, MAFB, MAFB.2 </span></span>
+<span id="cb4-297"><a href="#cb4-297" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 2 </span></span>
+<span id="cb4-298"><a href="#cb4-298" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  CD79A.1, HLA.DRA.2, CD79A.2, CD74.2, MS4A1.1, MS4A1.2, IGHM.2, IGHM.1, HLA.DPB1.2, BANK1.2 </span></span>
+<span id="cb4-299"><a href="#cb4-299" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     BANK1.1, NKG7.2, CCL5.2, HLA.DRB1.2, HLA.DPA1.2, IGKC.2, IGKC.1, IGHD.1, IGHD.2, HLA.DPB1.1 </span></span>
+<span id="cb4-300"><a href="#cb4-300" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     PFN1.1, CST7.2, LTB.2, IGHG1.1, IGHG1.2, PFN1.2, RPS21.2, CD37.1, IGLC2.2, IGLC2.1 </span></span>
+<span id="cb4-301"><a href="#cb4-301" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CD74, HLA.DRA, CD79A, MS4A1, IGHM, HLA.DPB1, HLA.DPA1, HLA.DRB1, BANK1, CCL5.1 </span></span>
+<span id="cb4-302"><a href="#cb4-302" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NKG7, CCL5, NKG7.1, IGKC, CD37, IGHD, LTB, RPLP1, PFN1, CST7.1 </span></span>
+<span id="cb4-303"><a href="#cb4-303" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGHG1, RPS21, CST7, IGLC2, RPS6, CALM1, GZMH.1, IGLC3, TCL1A, RPS5 </span></span>
+<span id="cb4-304"><a href="#cb4-304" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 3 </span></span>
+<span id="cb4-305"><a href="#cb4-305" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPS15A.1, CALM1.1, RPS3.1, RPLP1.1, RPS5.1, RPS10.1, RPS26.1, CD52.1, TRBC1.1, IL32 </span></span>
+<span id="cb4-306"><a href="#cb4-306" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS21.1, CD8A.1, SYNE2, HLA.DPA1.1, HLA.DPB1.1, PRF1, ETS1.1, RPS6.1, GZMH.1, GZMB.1 </span></span>
+<span id="cb4-307"><a href="#cb4-307" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TRBC2.1, MS4A7, GZMA, PTP4A2.1, CST7, SRGN.1, SYNE2.1, ID2, GZMA.1, CD37.1 </span></span>
+<span id="cb4-308"><a href="#cb4-308" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPS3.2, RPS15A.2, SRGN.2, S100A4.2, CD52.2, ETS1.2, RPS26.2, IL32.2, CXCR4.2, PTP4A2.2 </span></span>
+<span id="cb4-309"><a href="#cb4-309" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TRBC1.2, SYNE2.2, DUSP1, MALAT1.2, RPS10.2, RPS6.2, GZMH.2, RPLP1.2, ID2.2, RPS5.2 </span></span>
+<span id="cb4-310"><a href="#cb4-310" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     GZMA.2, PRF1.2, CST7.2, RPS3, MS4A7.1, RPS15A, GZMB.2, CD8A.2, HCK.1, IL7R.2 </span></span>
+<span id="cb4-311"><a href="#cb4-311" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 4 </span></span>
+<span id="cb4-312"><a href="#cb4-312" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPLP1.2, RPS21.2, RPS6.2, FOS.1, IGHD, RPS15A.2, IL7R.1, NEAT1.1, MALAT1.1, MALAT1.2 </span></span>
+<span id="cb4-313"><a href="#cb4-313" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     DUSP1.1, RPS26.1, IGHM, S100A6.2, RPS10.2, RPS5.2, RPS26.2, RPS6.1, CXCR4.2, IL4R </span></span>
+<span id="cb4-314"><a href="#cb4-314" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FCRL5, RPS21.1, ZBTB7A.1, GZMH.2, TCL1A, GZMB.2, BIRC3, CD247.1, TNFRSF13C, TRBC2 </span></span>
+<span id="cb4-315"><a href="#cb4-315" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPS26, RPLP1, RPS6, RPS21, FOS, FOS.2, MALAT1, IGHD.2, IGHD.1, RPS15A </span></span>
+<span id="cb4-316"><a href="#cb4-316" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS10, IL7R.2, IGHM.2, NEAT1, DUSP1.2, NEAT1.2, CXCR4.1, IGHM.1, DUSP1, IL4R.1 </span></span>
+<span id="cb4-317"><a href="#cb4-317" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IL4R.2, GZMH.1, FCRL5.2, FCRL5.1, GZMB.1, ZBTB7A, RPS3, RPS5, S100A6.1, TCL1A.2 </span></span>
+<span id="cb4-318"><a href="#cb4-318" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 5 </span></span>
+<span id="cb4-319"><a href="#cb4-319" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RP5.887A10.1, IGHG1, TCL1A.2, TCL1A.1, IGHD.2, IGHD.1, IL4R.1, IL4R.2, TRBC2, IGLC2 </span></span>
+<span id="cb4-320"><a href="#cb4-320" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGHM.1, IGHM.2, FCRL5.2, FCRL5.1, NEAT1.1, MS4A1, BANK1, IGLC3, ETS1.2, IGKC.2 </span></span>
+<span id="cb4-321"><a href="#cb4-321" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGKC.1, CD68, CD68.2, FOS.1, CALM1, MALAT1.2, ZBTB7A.1, LINC01272.2, LINC01272, NAP1L1 </span></span>
+<span id="cb4-322"><a href="#cb4-322" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RP5.887A10.1.1, RP5.887A10.1.2, IGHG1.1, IGHG1.2, TCL1A, IGHD, IL4R, IGLC2.1, IGLC2.2, IGHM </span></span>
+<span id="cb4-323"><a href="#cb4-323" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NEAT1.2, FCRL5, MS4A1.2, MS4A1.1, BANK1.2, BANK1.1, IGLC3.2, IGLC3.1, CALM1.1, FOS.2 </span></span>
+<span id="cb4-324"><a href="#cb4-324" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TRBC2.2, IGKC, CD68.1, DUSP1.2, ZBTB7A.2, PFN1.1, MALAT1, LINC01272.1, BIRC3.2, FOS</span></span>
+<span id="cb4-325"><a href="#cb4-325" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Non-unique features (rownames) present in the input matrix, making</span></span>
+<span id="cb4-326"><a href="#cb4-326" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unique</span></span>
+<span id="cb4-327"><a href="#cb4-327" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Centering and scaling data matrix</span></span>
+<span id="cb4-328"><a href="#cb4-328" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 1 </span></span>
+<span id="cb4-329"><a href="#cb4-329" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  LST1.2, LST1, PSAP, PSAP.2, CTSS, CTSS.2, CST3, COTL1.2, CST3.2, FTL.2 </span></span>
+<span id="cb4-330"><a href="#cb4-330" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     AIF1, FTH1.2, COTL1, FCGR3A, AIF1.2, SERPINA1, SERPINA1.2, IFITM3, SAT1.2, FTL </span></span>
+<span id="cb4-331"><a href="#cb4-331" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FCER1G, FTH1, CDKN1C.2, LYN.2, SAT1, FCGR3A.2, CDKN1C, MS4A7.2, MAFB.2, MAFB </span></span>
+<span id="cb4-332"><a href="#cb4-332" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  FTL.1, LST1.1, FTH1.1, PSAP.1, CTSS.1, COTL1.1, CST3.1, AIF1.1, FCGR3A.1, SERPINA1.1 </span></span>
+<span id="cb4-333"><a href="#cb4-333" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IFITM3.1, SAT1.1, TYROBP.1, FCER1G.1, CDKN1C.1, MAFB.1, TNFRSF1B.1, PECAM1.1, CEBPB.1, MS4A7.1 </span></span>
+<span id="cb4-334"><a href="#cb4-334" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CD68.1, LYN.1, NEAT1.1, S100A6.1, SPI1.1, S100A4.1, HCK.1, NAP1L1.1, LINC01272.1, FCN1.1 </span></span>
+<span id="cb4-335"><a href="#cb4-335" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 2 </span></span>
+<span id="cb4-336"><a href="#cb4-336" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  CD74, HLA.DRA, CD79A, MS4A1, IGHM, CCL5.1, BANK1, NKG7, NKG7.1, HLA.DRB1 </span></span>
+<span id="cb4-337"><a href="#cb4-337" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGKC, HLA.DPA1, CCL5, LTB, HLA.DPB1, CD37, IGHD, IGHG1, RPLP1, CST7.1 </span></span>
+<span id="cb4-338"><a href="#cb4-338" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CST7, RPS21, PFN1, IGLC2, RPS6, CALM1, GZMH.1, IL32.1, IL32, GZMA.1 </span></span>
+<span id="cb4-339"><a href="#cb4-339" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CD79A.2, CD79A.1, HLA.DRA.2, CD74.2, MS4A1.2, MS4A1.1, IGHM.1, IGHM.2, HLA.DPB1.2, CCL5.2 </span></span>
+<span id="cb4-340"><a href="#cb4-340" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NKG7.2, BANK1.2, HLA.DPA1.2, CD37.2, LTB.2, IGKC.2, BANK1.1, LTB.1, IGHD.1, IGHD.2 </span></span>
+<span id="cb4-341"><a href="#cb4-341" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGKC.1, RPS21.2, IGHG1.1, HLA.DRB1.2, CST7.2, PFN1.1, IGLC2.2, IGLC2.1, IGHG1.2, IL32.2 </span></span>
+<span id="cb4-342"><a href="#cb4-342" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 3 </span></span>
+<span id="cb4-343"><a href="#cb4-343" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  CALM1.1, CD52.1, RPS15A.1, RPS3.1, RPLP1.1, RPS26.1, RPS10.1, HLA.DPB1.1, RPS6.1, CD37.1 </span></span>
+<span id="cb4-344"><a href="#cb4-344" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS21.1, RPS5.1, CXCR4.1, SYNE2, GZMH, S100A6, ID2, HLA.DPA1.1, GZMA, TRBC1 </span></span>
+<span id="cb4-345"><a href="#cb4-345" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     TRBC2.1, IL32.1, IL32, TNFRSF1B, GZMH.1, GZMA.1, BIRC3.1, PTP4A2.1, HCK.2, HCK </span></span>
+<span id="cb4-346"><a href="#cb4-346" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPS3.2, PTP4A2.2, S100A4.2, RPS15A.2, RPS26.2, RPS6.2, ETS1.2, SRGN.2, MALAT1, CD52.2 </span></span>
+<span id="cb4-347"><a href="#cb4-347" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ID2.2, CALM1.2, RPLP1.2, RPS10.2, SYNE2.2, GZMH.2, HLA.DPB1, CXCR4.2, TRBC1.2, RPS5.2 </span></span>
+<span id="cb4-348"><a href="#cb4-348" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     S100A6.2, GZMA.2, IL32.2, HLA.DPA1, RPS3, HCK.1, LYN, TRBC2, FTL.2, RPS26 </span></span>
+<span id="cb4-349"><a href="#cb4-349" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 4 </span></span>
+<span id="cb4-350"><a href="#cb4-350" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  RPLP1, IL7R.2, RPS6, RPS15A, RPS26, RPS21, GZMH, FOS.2, CXCR4.1, NEAT1.2 </span></span>
+<span id="cb4-351"><a href="#cb4-351" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS10, DUSP1.2, DUSP1, CD247.2, FOS, IGHD.1, IGHD.2, FCRL5.1, FCRL5.2, GZMH.1 </span></span>
+<span id="cb4-352"><a href="#cb4-352" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NEAT1, RPS3, MALAT1.2, ZBTB7A, PTP4A2.2, TNFAIP3, GZMB, IGHM.2, IGHM.1, ZBTB7A.2 </span></span>
+<span id="cb4-353"><a href="#cb4-353" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPS21.2, IL7R.1, RPS15A.2, RPLP1.2, IL7R, RPS6.2, GZMH.2, FOS.1, NEAT1.1, DUSP1.1 </span></span>
+<span id="cb4-354"><a href="#cb4-354" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CD247, IGHD, S100A6.2, FCRL5, RPS5.2, RPS3.2, CD247.1, CXCR4, GZMB.2, ZBTB7A.1 </span></span>
+<span id="cb4-355"><a href="#cb4-355" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS26.1, RPS26.2, IGHM, TNFAIP3.2, RPS10.2, RPS21.1, PRF1, PRF1.1, TRBC2, IL4R </span></span>
+<span id="cb4-356"><a href="#cb4-356" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 5 </span></span>
+<span id="cb4-357"><a href="#cb4-357" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  TCL1A, RP5.887A10.1.1, RP5.887A10.1.2, IGHG1.1, IGHG1.2, IGHD, IL4R, IGHM, FCRL5, IGLC2.1 </span></span>
+<span id="cb4-358"><a href="#cb4-358" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGLC2.2, BIRC3.1, NEAT1.2, BANK1.2, BANK1.1, MS4A1.1, IGKC, CD68.1, MS4A1.2, NEAT1 </span></span>
+<span id="cb4-359"><a href="#cb4-359" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ETS1, IGLC3.2, FOS, FOS.2, PFN1.1, PFN1.2, CALM1.1, ZBTB7A, IGLC3.1, LINC01272.1 </span></span>
+<span id="cb4-360"><a href="#cb4-360" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  TCL1A.2, TCL1A.1, RP5.887A10.1, IGHG1, IGHD.2, IGHD.1, IL4R.2, IL4R.1, IGHM.2, FCRL5.2 </span></span>
+<span id="cb4-361"><a href="#cb4-361" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     FCRL5.1, IGHM.1, IGLC2, BANK1, NEAT1.1, MS4A1, CD68, IGLC3, CD68.2, IGKC.1 </span></span>
+<span id="cb4-362"><a href="#cb4-362" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ETS1.2, IGKC.2, FOS.1, PFN1, HLA.DRB1.2, TRBC2, BIRC3, FTL.2, ZBTB7A.1, SYNE2.2</span></span>
+<span id="cb4-363"><a href="#cb4-363" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: Non-unique features (rownames) present in the input matrix, making</span></span>
+<span id="cb4-364"><a href="#cb4-364" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; unique</span></span>
+<span id="cb4-365"><a href="#cb4-365" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Centering and scaling data matrix</span></span>
+<span id="cb4-366"><a href="#cb4-366" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 1 </span></span>
+<span id="cb4-367"><a href="#cb4-367" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  FTL.1, FTH1.1, LST1.1, PSAP.1, CTSS.1, COTL1.1, CST3.1, AIF1.1, FCGR3A.1, TYROBP.1 </span></span>
+<span id="cb4-368"><a href="#cb4-368" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IFITM3.1, SERPINA1.1, SAT1.1, MS4A7.1, LYN.1, MAFB.1, FCER1G.1, S100A6.1, TNFRSF1B.1, NEAT1.1 </span></span>
+<span id="cb4-369"><a href="#cb4-369" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CDKN1C.1, PECAM1.1, CEBPB.1, CD68.1, SPI1.1, S100A4.1, HCK.1, NAP1L1.1, FCN1.1, LINC01272.1 </span></span>
+<span id="cb4-370"><a href="#cb4-370" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  LST1, LST1.2, PSAP.2, CTSS.2, PSAP, CTSS, CST3, COTL1.2, CST3.2, FCGR3A </span></span>
+<span id="cb4-371"><a href="#cb4-371" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     AIF1, AIF1.2, FTH1.2, SERPINA1.2, SERPINA1, COTL1, FTL.2, SAT1.2, TYROBP, IFITM3 </span></span>
+<span id="cb4-372"><a href="#cb4-372" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IFITM3.2, FCGR3A.2, FTH1, FCER1G.2, SAT1, CDKN1C.2, LYN.2, MS4A7.2, MS4A7, MAFB.2 </span></span>
+<span id="cb4-373"><a href="#cb4-373" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 2 </span></span>
+<span id="cb4-374"><a href="#cb4-374" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  CD74.2, CD79A.1, HLA.DRA.2, CD79A.2, MS4A1.1, IGHM.2, IGHM.1, MS4A1.2, CCL5.2, HLA.DRB1.2 </span></span>
+<span id="cb4-375"><a href="#cb4-375" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     BANK1.1, BANK1.2, HLA.DPB1.2, IGKC.1, NKG7.2, HLA.DPA1.2, IGKC.2, IGHD.2, IGHD.1, CD37.2 </span></span>
+<span id="cb4-376"><a href="#cb4-376" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CST7.2, HLA.DPA1.1, IGHG1.1, IGHG1.2, LTB.2, CD37.1, IGLC2.1, IGLC2.2, GZMH.2, PFN1.1 </span></span>
+<span id="cb4-377"><a href="#cb4-377" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  CD74, HLA.DRA, CD79A, MS4A1, IGHM, CCL5.1, HLA.DRB1, CCL5, NKG7, HLA.DPA1 </span></span>
+<span id="cb4-378"><a href="#cb4-378" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     BANK1, HLA.DPB1, IGKC, CD37, IGHD, RPLP1, LTB, CST7, PFN1, RPS21 </span></span>
+<span id="cb4-379"><a href="#cb4-379" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CST7.1, IGHG1, GZMH, RPS6, IGLC2, CALM1, GNLY, IGLC3, TCL1A, RPS5 </span></span>
+<span id="cb4-380"><a href="#cb4-380" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 3 </span></span>
+<span id="cb4-381"><a href="#cb4-381" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  MALAT1.1, IL32.1, RPS15A.1, RPS3.1, NKG7.1, RPS5.1, CALM1.1, RPS21.1, ETS1, PFN1.1 </span></span>
+<span id="cb4-382"><a href="#cb4-382" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CD52.1, RPS6.1, GZMH.1, RPLP1.1, TRBC2, HLA.DPB1.1, HLA.DPA1.1, TRBC1.1, RPS10.1, RPS26.1 </span></span>
+<span id="cb4-383"><a href="#cb4-383" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     ID2, TRBC2.1, IL32, GZMH, SYNE2.1, S100A6, CD8B, HLA.DRB1.1, ETS1.1, GZMA </span></span>
+<span id="cb4-384"><a href="#cb4-384" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPS3.2, RPS15A.2, RPS6.2, S100A4.2, SRGN.2, CD52.2, ETS1.2, RPLP1.2, RPS10.2, CXCR4.2 </span></span>
+<span id="cb4-385"><a href="#cb4-385" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS5.2, IL32.2, RPS21.2, S100A6.2, MALAT1, SYNE2.2, PTP4A2.2, TRBC2.2, NAP1L1, GZMH.2 </span></span>
+<span id="cb4-386"><a href="#cb4-386" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS26.2, ID2.2, CALM1.2, MALAT1.2, TRBC1.2, HCK.1, ID2.1, GNAI2.2, CD8B.2, HLA.DPA1 </span></span>
+<span id="cb4-387"><a href="#cb4-387" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 4 </span></span>
+<span id="cb4-388"><a href="#cb4-388" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  NEAT1.1, RPS26.1, DUSP1.1, IGHD, RPLP1.2, IL7R.1, RPLP1.1, RPS21.2, IGHM, GZMH.2 </span></span>
+<span id="cb4-389"><a href="#cb4-389" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     RPS6.2, RPS26.2, CXCR4.2, ZBTB7A.1, FCRL5, FOS.1, RPS6.1, IL7R, RPS10.1, RPS15A.2 </span></span>
+<span id="cb4-390"><a href="#cb4-390" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     LINC01272.2, LINC01272, IL4R, PFN1.1, RPS5.2, S100A6.2, CD247.1, RPS15A.1, PTP4A2.1, RPS21.1 </span></span>
+<span id="cb4-391"><a href="#cb4-391" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  RPLP1, RPS26, RPS6, RPS15A, NEAT1.2, DUSP1.2, NEAT1, RPS10, DUSP1, RPS21 </span></span>
+<span id="cb4-392"><a href="#cb4-392" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGHD.2, IGHD.1, RPS3, IL7R.2, IGHM.1, GZMH.1, ZBTB7A, IGHM.2, FCRL5.1, FCRL5.2 </span></span>
+<span id="cb4-393"><a href="#cb4-393" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     PTP4A2.2, CXCR4.1, FOS.2, GZMH, LINC01272.1, ZBTB7A.2, CD247.2, BIRC3.2, IL4R.2, BIRC3.1 </span></span>
+<span id="cb4-394"><a href="#cb4-394" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; PC_ 5 </span></span>
+<span id="cb4-395"><a href="#cb4-395" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Positive:  TCL1A.2, TCL1A.1, RP5.887A10.1, IGHG1, IGHD.2, IGHD.1, IL4R.2, FCRL5.2, FCRL5.1, IGHM.2 </span></span>
+<span id="cb4-396"><a href="#cb4-396" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     NEAT1.1, IL4R.1, IGLC2, IGHM.1, LINC01272, LINC01272.2, NAP1L1, GZMB.1, ZBTB7A.1, CD68.2 </span></span>
+<span id="cb4-397"><a href="#cb4-397" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     CD68, CD247, MS4A1, DUSP1.1, BANK1, GZMB, S100A6.2, FOS.1, FCER1G.2, IGKC.1 </span></span>
+<span id="cb4-398"><a href="#cb4-398" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Negative:  TCL1A, RP5.887A10.1.2, RP5.887A10.1.1, IGHG1.1, IGHG1.2, IGHD, IL4R, NEAT1.2, FCRL5, IGHM </span></span>
+<span id="cb4-399"><a href="#cb4-399" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     IGLC2.2, IGLC2.1, NEAT1, LINC01272.1, ZBTB7A, CD68.1, GZMB.2, DUSP1.2, MS4A1.1, MS4A1.2 </span></span>
+<span id="cb4-400"><a href="#cb4-400" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     JUNB.2, ZBTB7A.2, BANK1.2, BANK1.1, FOS.2, DUSP1, IGLC3.1, IGLC3.2, PFN1.2, CD247.2</span></span></code></pre></div>
+</div>
+<div id="input" class="section level2">
+<h2>Input</h2>
+<ol style="list-style-type: decimal">
+<li><code>train</code> A data frame with cell type labels as the first
+column, followed by a gene expression matrix where each row is a cell
+and each column is a gene from the training dataset.</li>
+<li><code>test</code> A gene expression matrix where each row is a cell
+and each column is a gene from the testing dataset.</li>
+<li><code>distribution</code> A character string indicating the
+distribution assumption for positive gene expression levels. Should be
+one of “normal” (default), or “dep” (<em>depth function?</em>).</li>
+<li><code>correction</code> A character string indicating the batch
+effect removal method of choice. Should be one of “auto” (default),
+“seurat”, or “harmony”. “auto” will automatically select the batch
+effect removal method that corresponds to scAnnotate’s recommended
+workflow for the given situation. That is, Seurat is selected for big
+data (i.e. all cell types have greater than 100 observations with at
+most one exception type, that has less than 100 and greater than 20
+observations) and Harmony is selected for small data (i.e. all cell
+types have less than 100 observations)</li>
+<li><code>screening</code> A character string indicating the gene
+screening method of choice. Should be one of “wilcox”(default) or
+“t.test”</li>
+<li><code>threshold</code> A numeric value indicating the threshold used
+for probabilities to classify cells into classes. Should be number from
+“0” (default) to “1”. If there is no probability associated with any
+cell type that is higher than the threshold, the given cell will be
+labeled as “unassigned”.</li>
+</ol>
+</div>
+<div id="output" class="section level2">
+<h2>Output</h2>
+<p>A vector containing the annotated cell type labels for the cells in
+the test data.</p>
+</div>
+<div id="check-the-prediction-results-by-f1-score-and-accuracy" class="section level2">
+<h2>Check the prediction results by F1 score and accuracy</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eva_cal</span>(<span class="at">prediction =</span> predict_label,<span class="at">cell_label =</span> pbmc2[,<span class="dv">1</span>])</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         B cell CD16+ monocyte Cytotoxic T cell mean F1 score  accuracy</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] 0.9383562      0.9283276        0.9170732      0.927919 0.9270186</span></span></code></pre></div>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
