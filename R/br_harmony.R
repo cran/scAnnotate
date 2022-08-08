@@ -4,21 +4,31 @@
 #'
 #' @param train.xx A data matrix where each row is a cell and each column is a gene in training data
 #' @param test A data matrix where each row is a cell and each column is a gene  in test data
+#' @param lognormalized A logical string indicate if both input data are log-normalized or not. TRUE (default) indicates input data are log-normalized, FALSE indicates input data are raw data.
 #'
 #' @return A list containing aligned PCs matrix for training data and test data.
 #'
 #' @importFrom harmony HarmonyMatrix
-#' @importFrom Seurat CreateSeuratObject RunPCA ScaleData
+#' @importFrom Seurat CreateSeuratObject RunPCA ScaleData NormalizeData
 #' @noRd
 #'
-br_harmony=function(train.xx,test){
+br_harmony=function(train.xx,test,lognormalized){
 
   meta_data=data.frame(dataset=c(rep("train",nrow(train.xx)),rep("test",nrow(test))))
   #pca
-  obj.pc=CreateSeuratObject(counts = cbind(t(train.xx),t(test)))
-  obj.pc=FindVariableFeatures(obj.pc)
-  obj.pc=ScaleData(obj.pc)
-  obj.pc=RunPCA(obj.pc,npcs = 20)
+  if(lognormalized==TRUE){
+    obj.pc=CreateSeuratObject(counts = cbind(t(train.xx),t(test)))
+    obj.pc=FindVariableFeatures(obj.pc)
+    obj.pc=ScaleData(obj.pc)
+    obj.pc=RunPCA(obj.pc,npcs = 20)
+  }else{
+    obj.pc=CreateSeuratObject(counts = cbind(t(train.xx),t(test)))
+    obj.pc=NormalizeData(obj.pc,normalization.method = "LogNormalize")
+    obj.pc=FindVariableFeatures(obj.pc)
+    obj.pc=ScaleData(obj.pc)
+    obj.pc=RunPCA(obj.pc,npcs = 20)
+  }
+
 
   pc.matrix= obj.pc@reductions$pca@cell.embeddings
 

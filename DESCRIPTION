@@ -2,7 +2,7 @@ Package: scAnnotate
 Type: Package
 Title: An Automated Cell Type Annotation Tool for Single-Cell
         RNA-Sequencing Data
-Version: 0.0.1
+Version: 0.0.2
 Authors@R: c(person("Xiangling", "Ji",role="aut"),
        person("Danielle","Tsao",role="aut"),
        person("Kailun","Bai",role="ctb"),
@@ -20,7 +20,7 @@ VignetteBuilder: knitr
 Imports: glmnet, stats, MTPS, Seurat (>= 4.0.5), harmony
 Config/testthat/edition: 3
 NeedsCompilation: no
-Packaged: 2022-06-30 00:58:42 UTC; 54041
+Packaged: 2022-08-08 01:58:13 UTC; 54041
 Author: Xiangling Ji [aut],
   Danielle Tsao [aut],
   Kailun Bai [ctb],
@@ -28,4 +28,4 @@ Author: Xiangling Ji [aut],
   Xuekui Zhang [aut, cre]
 Maintainer: Xuekui Zhang <xuekui@uvic.ca>
 Repository: CRAN
-Date/Publication: 2022-07-01 11:00:02 UTC
+Date/Publication: 2022-08-08 06:20:02 UTC

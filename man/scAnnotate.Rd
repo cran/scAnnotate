@@ -10,7 +10,8 @@ scAnnotate(
   distribution = c("normal", "dep"),
   correction = c("auto", "harmony", "seurat"),
   screening = c("wilcox", "t.test"),
-  threshold = 0
+  threshold = 0,
+  lognormalized = TRUE
 )
 }
 \arguments{
@@ -25,6 +26,8 @@ scAnnotate(
 \item{screening}{A character string indicate the gene screening methods, should be one of "wilcox"(default) or "t.test" .}
 
 \item{threshold}{A numeric number indicate the threshold used for probabilities to classify cells into classes,should be number from "0"(default) to "1". If there's no probability higher than the threshold associated to a cell type, the cell will be labeled as "unassigned"}
+
+\item{lognormalized}{A logical string indicate if both input data are log-normalized or not. TRUE (default) indicates input data are log-normalized, FALSE indicates input data are raw data.}
 }
 \value{
 A vector contain annotate cell type labels for test data
@@ -40,5 +43,6 @@ predict_label=scAnnotate(train=pbmc1,
                          distribution="normal",
                          correction ="harmony",
                          screening ="wilcox",
-                         threshold=0)
+                         threshold=0,
+                         lognormalized=TRUE)
 }

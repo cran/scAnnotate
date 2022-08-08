@@ -8,6 +8,7 @@
 #' @param correction A character string indicate the batch effect removal, should be one of "auto"(default), "seurat", or "harmony". "auto" will automatically select the batch effect removal follow our suggestion  using Seurat for big data (all cell population sample size greater than 100 except one cell population less than 100  and greater than 20) and using harmony for small data.
 #' @param screening A character string indicate the gene screening methods, should be one of "wilcox"(default) or "t.test" .
 #' @param threshold A numeric number indicate the threshold used for probabilities to classify cells into classes,should be number from "0"(default) to "1". If there's no probability higher than the threshold associated to a cell type, the cell will be labeled as "unassigned"
+#' @param lognormalized A logical string indicate if both input data are log-normalized or not. TRUE (default) indicates input data are log-normalized, FALSE indicates input data are raw data.
 #'
 #' @return A vector contain annotate cell type labels for test data
 #'
@@ -24,14 +25,16 @@
 #'                          distribution="normal",
 #'                          correction ="harmony",
 #'                          screening ="wilcox",
-#'                          threshold=0)
+#'                          threshold=0,
+#'                          lognormalized=TRUE)
 
 scAnnotate=function(train,
                     test,
                     distribution=c("normal","dep"),
                     correction=c("auto","harmony","seurat"),
                     screening=c("wilcox","t.test"),
-                    threshold=0){
+                    threshold=0,
+                    lognormalized=TRUE){
   #parameter
   distribution=match.arg(distribution)
   screening=match.arg(screening)
@@ -43,7 +46,7 @@ scAnnotate=function(train,
 
   if(correction=="auto"){
     t.ss=table(train[,1])
-    if(sum(t.ss>100)>(length(train_cellnames)-2)&sum(t.ss>20)>(length(train_cellnames)-1)){
+    if(sum(t.ss>100)>(length(train_cellnames)-2)){
       correction="seurat"
     }else{
       correction="harmony"
@@ -53,7 +56,8 @@ scAnnotate=function(train,
   if(correction=="seurat"){
     #1.  Batch effect by Seurat
     align.matrix=br_seurat(train.xx = train[,-1],
-                           test = test)
+                           test = test,
+                           lognormalized=lognormalized)
 
     train=data.frame(yy=train[,1],
                          t(align.matrix[["train"]]))
@@ -184,7 +188,8 @@ scAnnotate=function(train,
 
   if(correction=="harmony"){
     align.matrix=br_harmony(train.xx = train[,-1],
-                            test = test)
+                            test = test,
+                            lognormalized=lognormalized)
     train=data.frame(yy=train[,1],
                          align.matrix[["train"]])
     test=align.matrix[["test"]]
