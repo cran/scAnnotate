@@ -790,28 +790,29 @@ and each column is a gene from the training dataset.</li>
 <li><code>test</code> A gene expression matrix where each row is a cell
 and each column is a gene from the testing dataset.</li>
 <li><code>distribution</code> A character string indicating the
-distribution assumption for positive gene expression levels. Should be
-one of “normal” (default), or “dep” (<em>depth function?</em>).</li>
+distribution assumption for positive gene expression levels. It should
+be one of “normal” (default) or “dep”. “dep” refers to depth measure,
+which is a non-parametric distribution estimation approach.</li>
 <li><code>correction</code> A character string indicating the batch
-effect removal method of choice. Should be one of “auto” (default),
+effect removal method of choice. It should be one of “auto” (default),
 “seurat”, or “harmony”. “auto” will automatically select the batch
 effect removal method that corresponds to scAnnotate’s recommended
-workflow for the given situation. That is, Seurat is selected for big
-data (i.e. all cell types have greater than 100 observations with at
-most one exception type, that has less than 100 and greater than 20
-observations) and Harmony is selected for small data (i.e. all cell
-types have less than 100 observations)</li>
+workflow for the given situation. We use Seurat for dataset with at most
+one rare cell population (at most one cell population less than 100
+cells) and Harmony for dataset with at least two rare cell populations
+(at least two cell populations less than 100 cells).</li>
 <li><code>screening</code> A character string indicating the gene
-screening method of choice. Should be one of “wilcox”(default) or
+screening method of choice. It should be one of “wilcox”(default) or
 “t.test”</li>
-<li><code>threshold</code> A numeric value indicating the threshold used
-for probabilities to classify cells into classes. Should be number from
-“0” (default) to “1”. If there is no probability associated with any
-cell type that is higher than the threshold, the given cell will be
-labeled as “unassigned”.</li>
-<li><code>lognormalized</code> A logical string indicate if both input
-data are log-normalized or not. TRUE (default) indicates input data are
-log-normalized, FALSE indicates input data are raw data.</li>
+<li><code>threshold</code> A numeric value indicates the threshold used
+for probabilities to classify cells. It should be number from “0”
+(default) to “1”. If there is no probability associated with any cell
+type higher than the threshold, the given cell will be labeled as
+“unassigned”.</li>
+<li><code>lognormalized</code> A logical string indicates whether both
+input data are log-normalized or raw matrices. TRUE (default) indicates
+input data are log-normalized, and FALSE indicates input data are raw
+data.</li>
 </ol>
 </div>
 <div id="output" class="section level2">
@@ -819,8 +820,9 @@ log-normalized, FALSE indicates input data are raw data.</li>
 <p>A vector containing the annotated cell type labels for the cells in
 the test data.</p>
 </div>
-<div id="check-the-prediction-results-by-f1-score-and-accuracy" class="section level2">
-<h2>Check the prediction results by F1 score and accuracy</h2>
+<div id="check-the-prediction-results-by-f1-score-of-each-cell-population-mean-of-f1-score-and-overall-accuracy" class="section level2">
+<h2>Check the prediction results by F1 score of each cell population,
+mean of F1 score and overall accuracy</h2>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">eva_cal</span>(<span class="at">prediction =</span> predict_label,<span class="at">cell_label =</span> pbmc2[,<span class="dv">1</span>])</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         B cell CD16+ monocyte Cytotoxic T cell mean F1 score  accuracy</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1,] 0.9383562      0.9283276        0.9170732      0.927919 0.9270186</span></span></code></pre></div>

@@ -4,11 +4,11 @@
 #'
 #' @param train A data frame of cell type label in the first column and a gene expression matrix where each row is a cell and each column is a gene from training data
 #' @param test A data matrix where each row is a cell and each column is a gene from test data
-#' @param distribution A character string indicate the distribution assumption on positive gene expression, should be one of "normal"(default), or "dep"
-#' @param correction A character string indicate the batch effect removal, should be one of "auto"(default), "seurat", or "harmony". "auto" will automatically select the batch effect removal follow our suggestion  using Seurat for big data (all cell population sample size greater than 100 except one cell population less than 100  and greater than 20) and using harmony for small data.
-#' @param screening A character string indicate the gene screening methods, should be one of "wilcox"(default) or "t.test" .
-#' @param threshold A numeric number indicate the threshold used for probabilities to classify cells into classes,should be number from "0"(default) to "1". If there's no probability higher than the threshold associated to a cell type, the cell will be labeled as "unassigned"
-#' @param lognormalized A logical string indicate if both input data are log-normalized or not. TRUE (default) indicates input data are log-normalized, FALSE indicates input data are raw data.
+#' @param distribution A character string indicates the distribution assumption on positive gene expression, which should be one of "normal"(default) or "dep". "dep" refers to depth measure, which is a non-parametric distribution estimation approach.
+#' @param correction A character string indicates the batch effect removal, which should be one of "auto"(default), "seurat", or "harmony". "auto" will automatically select the batch effect removal to follow our suggestion. That uses Seurat for dataset with at most one rare cell population (at most one cell population less than 100 cells) and Harmony for dataset with at least two rare cell populations (at least two cell populations less than 100 cells).
+#' @param screening A character string indicates the gene screening methods, which should be one of "wilcox"(default) or "t.test".
+#' @param threshold A numeric number indicates the threshold used for probabilities to classify cells, which should be a number from "0"(default) to "1". If there's no probability higher than the threshold associated with a cell type, the cell will be labeled as "unassigned."
+#' @param lognormalized A logical string indicates if both input data are log-normalized or raw matrix. TRUE (default) indicates input data are log-normalized, and FALSE indicates input data are raw data.
 #'
 #' @return A vector contain annotate cell type labels for test data
 #'
@@ -46,7 +46,7 @@ scAnnotate=function(train,
 
   if(correction=="auto"){
     t.ss=table(train[,1])
-    if(sum(t.ss>100)>(length(train_cellnames)-2)){
+    if(sum(t.ss>=100)>(length(train_cellnames)-2)){
       correction="seurat"
     }else{
       correction="harmony"

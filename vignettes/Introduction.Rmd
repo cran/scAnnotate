@@ -67,17 +67,17 @@ predict_label=scAnnotate(train=pbmc1,
 ## Input
 1. ```train``` A data frame with cell type labels as the first column, followed by a gene expression matrix where each row is a cell and each column is a gene from the training dataset.
 2. ```test``` A gene expression matrix where each row is a cell and each column is a gene from the testing dataset.
-3. ```distribution``` A character string indicating the distribution assumption for positive gene expression levels. Should be one of "normal" (default), or "dep" (*depth function?*).
-4. ```correction``` A character string indicating the batch effect removal method of choice. Should be one of "auto" (default), "seurat", or "harmony". "auto" will automatically select the batch effect removal method that corresponds to scAnnotate's recommended workflow for the given situation. That is, Seurat is selected for big data (i.e. all cell types have greater than 100 observations with at most one exception type, that has less than 100 and greater than 20 observations) and Harmony is selected for small data (i.e. all cell types have less than 100 observations)
-5. ```screening``` A character string indicating the gene screening method of choice. Should be one of "wilcox"(default) or "t.test"
-6. ```threshold``` A numeric value indicating the threshold used for probabilities to classify cells into classes. Should be number from "0" (default) to "1". If there is no probability associated with any cell type that is higher than the threshold, the given cell will be labeled as "unassigned".
-7. ```lognormalized ``` A logical string indicate if both input data are log-normalized or not. TRUE (default) indicates input data are log-normalized, FALSE indicates input data are raw data.
+3. ```distribution``` A character string indicating the distribution assumption for positive gene expression levels. It should be one of "normal" (default) or "dep". "dep" refers to depth measure, which is a non-parametric distribution estimation approach.
+4. ```correction``` A character string indicating the batch effect removal method of choice. It should be one of "auto" (default), "seurat", or "harmony". "auto" will automatically select the batch effect removal method that corresponds to scAnnotate's recommended workflow for the given situation. We use Seurat for dataset with at most one rare cell population (at most one cell population less than 100 cells) and Harmony for dataset with at least two rare cell populations (at least two cell populations less than 100 cells).
+5. ```screening``` A character string indicating the gene screening method of choice. It should be one of "wilcox"(default) or "t.test"
+6. ```threshold``` A numeric value indicates the threshold used for probabilities to classify cells. It should be number from "0" (default) to "1". If there is no probability associated with any cell type higher than the threshold, the given cell will be labeled as "unassigned".
+7. ```lognormalized ``` A logical string indicates whether both input data are log-normalized or raw matrices. TRUE (default) indicates input data are log-normalized, and FALSE indicates input data are raw data.
 
 
 ## Output
 A vector containing the annotated cell type labels for the cells in the test data.
 
-## Check the prediction results by F1 score and accuracy
+## Check the prediction results by F1 score of each cell population, mean of F1 score and overall accuracy
 
 ```{r}
 eva_cal(prediction = predict_label,cell_label = pbmc2[,1])
