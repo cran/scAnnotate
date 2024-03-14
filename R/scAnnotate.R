@@ -13,20 +13,22 @@
 #' @return A vector contain annotate cell type labels for test data
 #'
 #' @export
-#' @importFrom MTPS createFolds
 #' @importFrom glmnet cv.glmnet glmnet
 #' @importFrom stats predict
-#' @importFrom Seurat CreateSeuratObject FindVariableFeatures RunPCA ScaleData
+#' @importFrom Seurat CreateSeuratObject FindVariableFeatures RunPCA ScaleData SCTransform PercentageFeatureSet LayerData
+#' @importFrom SeuratObject LayerData
 #' @examples
 #' data(pbmc1)
 #' data(pbmc2)
-#' predict_label=scAnnotate(train=pbmc1,
-#'                          test=pbmc2[,-1],
-#'                          distribution="normal",
-#'                          correction ="harmony",
-#'                          screening ="wilcox",
-#'                          threshold=0,
-#'                          lognormalized=TRUE)
+#' \dontrun{
+#'   predict_label=scAnnotate(train=pbmc1,
+#'                            test=pbmc2[,-1],
+#'                            distribution="normal",
+#'                            correction ="harmony",
+#'                            screening ="wilcox",
+#'                            threshold=0,
+#'                            lognormalized=TRUE)
+#'  }
 
 scAnnotate=function(train,
                     test,
@@ -54,6 +56,11 @@ scAnnotate=function(train,
   }
 
   if(correction=="seurat"){
+    correction="harmony"
+    cat("\n !!! \n Switch to Harmony batch effect removal, Seurat batch effect removal
+         is tempoarily disabled due to conflict introduced by its version 5 upgrade \n !!! \n")
+  }
+  if(F){
     #1.  Batch effect by Seurat
     align.matrix=br_seurat(train.xx = train[,-1],
                            test = test,
@@ -147,7 +154,8 @@ scAnnotate=function(train,
       colnames(px.com.test)=rownames(test2)
 
       #c)pca
-      obj.pc=CreateSeuratObject(counts = cbind(px.com.train2,px.com.test))
+#     browser()
+       obj.pc=CreateSeuratObject(counts = cbind(px.com.train2,px.com.test))
       obj.pc@meta.data$dat=c(rep("train",ncol(px.com.train2)),rep("test",ncol(px.com.test)))
       obj.pc=FindVariableFeatures(obj.pc)
       #VariableFeaturePlot(obj.pc)

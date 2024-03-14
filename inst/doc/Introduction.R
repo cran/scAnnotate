@@ -1,4 +1,4 @@
-## ---- include = FALSE---------------------------------------------------------
+## ----include = FALSE----------------------------------------------------------
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -15,15 +15,15 @@ data(pbmc2)
 #  ?pbmc1
 #  ?pbmc2
 
-## -----------------------------------------------------------------------------
-predict_label=scAnnotate(train=pbmc1,
-                         test=pbmc2[,-1],
-                         distribution="normal",
-                         correction ="auto",
-                         screening = "wilcox",
-                         threshold=0,
-                         lognormalized=TRUE)
+## ----eval=FALSE---------------------------------------------------------------
+#  predict_label=scAnnotate(train=pbmc1,
+#                           test=pbmc2[,-1],
+#                           distribution="normal",
+#                           correction ="auto",
+#                           screening = "wilcox",
+#                           threshold=0,
+#                           lognormalized=TRUE)
 
-## -----------------------------------------------------------------------------
-eva_cal(prediction = predict_label,cell_label = pbmc2[,1])
+## ----eval=FALSE---------------------------------------------------------------
+#  eva_cal(prediction = predict_label,cell_label = pbmc2[,1])
 

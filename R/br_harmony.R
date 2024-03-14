@@ -15,19 +15,25 @@
 br_harmony=function(train.xx,test,lognormalized){
 
   meta_data=data.frame(dataset=c(rep("train",nrow(train.xx)),rep("test",nrow(test))))
+  obj.pc=CreateSeuratObject(counts = cbind(t(train.xx),t(test)))
+  obj.pc <- PercentageFeatureSet(obj.pc, pattern = "^MT-", col.name = "percent.mt")
+  obj.pc <- SCTransform(obj.pc, vars.to.regress = "percent.mt", verbose = FALSE)
+  obj.pc=FindVariableFeatures(obj.pc)
+  obj.pc=RunPCA(obj.pc,npcs = 20)
+  
   #pca
-  if(lognormalized==TRUE){
-    obj.pc=CreateSeuratObject(counts = cbind(t(train.xx),t(test)))
-    obj.pc=FindVariableFeatures(obj.pc)
-    obj.pc=ScaleData(obj.pc)
-    obj.pc=RunPCA(obj.pc,npcs = 20)
-  }else{
-    obj.pc=CreateSeuratObject(counts = cbind(t(train.xx),t(test)))
-    obj.pc=NormalizeData(obj.pc,normalization.method = "LogNormalize")
-    obj.pc=FindVariableFeatures(obj.pc)
-    obj.pc=ScaleData(obj.pc)
-    obj.pc=RunPCA(obj.pc,npcs = 20)
-  }
+  # if(lognormalized==TRUE){
+  #   obj.pc=CreateSeuratObject(counts = cbind(t(train.xx),t(test)))
+  #   obj.pc=FindVariableFeatures(obj.pc)
+  #   obj.pc=ScaleData(obj.pc)
+  #   obj.pc=RunPCA(obj.pc,npcs = 20)
+  # }else{
+  #   obj.pc=CreateSeuratObject(counts = cbind(t(train.xx),t(test)))
+  #   obj.pc=NormalizeData(obj.pc,normalization.method = "LogNormalize")
+  #   obj.pc=FindVariableFeatures(obj.pc)
+  #   obj.pc=ScaleData(obj.pc)
+  #   obj.pc=RunPCA(obj.pc,npcs = 20)
+  # }
 
 
   pc.matrix= obj.pc@reductions$pca@cell.embeddings

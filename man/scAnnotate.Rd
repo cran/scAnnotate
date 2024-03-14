@@ -38,11 +38,13 @@ Annotate cell type labels of test data using a trained mixture model from traini
 \examples{
 data(pbmc1)
 data(pbmc2)
-predict_label=scAnnotate(train=pbmc1,
-                         test=pbmc2[,-1],
-                         distribution="normal",
-                         correction ="harmony",
-                         screening ="wilcox",
-                         threshold=0,
-                         lognormalized=TRUE)
+\dontrun{
+  predict_label=scAnnotate(train=pbmc1,
+                           test=pbmc2[,-1],
+                           distribution="normal",
+                           correction ="harmony",
+                           screening ="wilcox",
+                           threshold=0,
+                           lognormalized=TRUE)
+ }
 }

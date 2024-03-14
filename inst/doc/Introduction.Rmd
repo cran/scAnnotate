@@ -54,7 +54,7 @@ Our example datasets are already log-transformed and normalized.
 
 Suppose your input gene expression data is in raw counts. In that case, our software will normalize the raw input data using the NormalizeData function from the `Seurat` package, via the "LogNormalize" method and a scale factor of 10,000. That normalizes the gene expression by each cell's "sequencing depth" and applies a natural logarithmic transformation. When you input raw data, you should choose the parameter lognormalized=FALSE using the `scAnnotate` functions.
 
-```{r}
+```{r eval=FALSE}
 predict_label=scAnnotate(train=pbmc1,
                          test=pbmc2[,-1],
                          distribution="normal",
@@ -79,7 +79,7 @@ A vector containing the annotated cell type labels for the cells in the test dat
 
 ## Check the prediction results by F1 score of each cell population, mean of F1 score and overall accuracy
 
-```{r}
+```{r eval=FALSE}
 eva_cal(prediction = predict_label,cell_label = pbmc2[,1])
 ```
 

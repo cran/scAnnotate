@@ -18,33 +18,41 @@ br_seurat=function(train.xx,test,lognormalized){
   # split the dataset into a list of two seurat objects (stim and CTRL)
   obj.list <- SplitObject(obj, split.by = "stim")
 
-  if(lognormalized==TRUE){
-    # identify variable features for each dataset independently
-    obj.list <- lapply(X = obj.list, FUN = function(x) {
-      #x <- NormalizeData(x)
-      x <- FindVariableFeatures(x, selection.method = "vst", nfeatures = 2000)
-    })
-  }else{
-    # normalize and identify variable features for each dataset independently
-    obj.list <- lapply(X = obj.list, FUN = function(x) {
-      x <- NormalizeData(x,normalization.method = "LogNormalize")
-      x <- FindVariableFeatures(x, selection.method = "vst", nfeatures = 2000)
-    })
-  }
+  obj.list <- lapply(X = obj.list, FUN = function(x) {
+    x <- PercentageFeatureSet(x, pattern = "^MT-", col.name = "percent.mt")
+    x <- SCTransform(x, vars.to.regress = "percent.mt", verbose = FALSE)
+    x <- FindVariableFeatures(x, selection.method = "vst", nfeatures = 500)
+  })
+  
+  # if(lognormalized==TRUE){
+  #   # identify variable features for each dataset independently
+  #   obj.list <- lapply(X = obj.list, FUN = function(x) {
+  #     #x <- NormalizeData(x)
+  #     x <- FindVariableFeatures(x, selection.method = "vst", nfeatures = 2000)
+  #   })
+  # }else{
+  #   # normalize and identify variable features for each dataset independently
+  #   obj.list <- lapply(X = obj.list, FUN = function(x) {
+  #     x <- NormalizeData(x,normalization.method = "LogNormalize")
+  #     x <- FindVariableFeatures(x, selection.method = "vst", nfeatures = 2000)
+  #   })
+  # }
 
 
   # select features that are repeatedly variable across datasets for integration
   features <- SelectIntegrationFeatures(object.list = obj.list)
-  train.xx=obj.list[["train"]]@assays$RNA@counts[features,]
+  train.xx <- LayerData(obj.list[["train"]], assay = "RNA", layer = "counts")[features,]
+  #train.xx=obj.list[["train"]]@assays$RNA@layers$counts[features,]
   train.xx=as.matrix(train.xx)
-  test=obj.list[["test"]]@assays$RNA@counts[features,]
+  #test=obj.list[["test"]]@assays$RNA@counts[features,]
+  test=LayerData(obj.list[["train"]], assay = "RNA", layer = "counts")[features,]
   test=as.matrix(test)
 
   ## Perform integration
   #We then identify anchors using the `FindIntegrationAnchors()` function,
   #which takes a list of Seurat objects as input, and use these anchors to
   #integrate the two datasets together with `IntegrateData()`.
-  obj.anchors <- FindIntegrationAnchors(object.list = obj.list, anchor.features = features)
+  obj.anchors <- FindIntegrationAnchors(object.list = obj.list, scale=F, anchor.features = features)
   # this command creates an 'integrated' data assay
   obj.combined <- IntegrateData(anchorset = obj.anchors)
 
